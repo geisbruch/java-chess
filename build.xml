@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<project name="chess" basedir="." default="jar">
+    <property name="src" value="src"/>
+    <property name="output" value="bin"/>
+ 
+    <target name="compile" depends="create">
+        <javac destdir="bin">
+            <src path="${src}"/>
+            <classpath refid="java"/>
+        </javac>
+    </target>
+ 
+    <target name="jar" depends="compile">
+        <jar destfile="chess.jar">
+            <fileset dir="bin"/>
+            <fileset dir="${src}">
+                <include name="resources/**/*.*" />
+                <include name="resources/images/**/*.*" />
+            </fileset>
+        </jar>
+    </target>
+ 
+ 
+    <target name="clean">
+        <delete dir="${output}"/>
+    </target>
+ 
+    <target name="create" depends="clean">
+        <mkdir dir="${output}"/>
+    </target>
+ 
+    <path id="java">
+        <fileset dir="src/resources">
+            <include name="*.*"/>
+        </fileset>
+    </path>
+</project>
